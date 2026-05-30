@@ -28,8 +28,8 @@ _start:
       mov rdi, [BLACK]
       call ClearBackground
 
-      mov edi, [pos]
-      mov esi, [pos + 4]
+      mov edi, [left_paddle]
+      mov esi, [left_paddle + 4]
       mov rdx, 10
       mov rcx, 50
       mov r8d, [WHITE]
@@ -47,9 +47,20 @@ end_game:
 
 section '.data' writeable
   title: db "foo bar baz", 0
-  pos:
-    dd 10
-    dd 10
+  left_paddle:
+    dd 10 ;x
+    dd 10 ;y
+    db 0  ;input (0=none, 1=up, 2=down)
+  right_paddle:
+    dd 10 ;x
+    dd 10 ;y
+    db 0  ;input (0=none, 1=up, 2=down)
+  ball:
+    dd 10 ;pos x
+    dd 10 ;pos y
+    dd 10 ;vel x
+    dd 10 ;vel y
+
   BLACK:
     db 0x00 ;r
     db 0x00 ;g
