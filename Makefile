@@ -1,5 +1,5 @@
 main:
 	nasm main.asm -f elf64
-	ld main.o
+	ld main.o -o pong_asm
 run: main
-	./a.out
+	./pong_asm
