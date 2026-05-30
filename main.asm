@@ -21,12 +21,14 @@ _start:
   call BeginDrawing
     mov rdi, [BLACK]
     call ClearBackground
+
     mov rdi, title
     mov rsi, 400
     mov rdx, 300
     mov rcx, 20
     mov r8d, [WHITE]
     call DrawText
+
   call EndDrawing
 
   call WindowShouldClose
