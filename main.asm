@@ -9,6 +9,7 @@ section '.text' executable
   extrn EndDrawing
   extrn DrawRectangle
   extrn ClearBackground
+  extrn IsKeyDown
 
 _start:
   mov rdi, 800
@@ -18,6 +19,9 @@ _start:
   
   ;game loop
   ze_loop:
+  call WindowShouldClose
+  test rax, rax
+  jnz end_game
 
     call BeginDrawing
 
@@ -33,12 +37,10 @@ _start:
 
     call EndDrawing
 
-  call WindowShouldClose
-  test rax, rax
-  jz ze_loop
+  jmp ze_loop
 
+end_game:
   call CloseWindow
-
   mov rax, 231 ;exit all spawned threads
   mov rdi, 0
   syscall
