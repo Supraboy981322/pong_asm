@@ -15,22 +15,23 @@ _start:
   mov rsi, 600
   mov rdx, title
   call InitWindow
-
-
+  
+  ;game loop
   ze_loop:
 
-  call BeginDrawing
-    mov rdi, [BLACK]
-    call ClearBackground
+    call BeginDrawing
 
-    mov edi, [pos]
-    mov esi, [pos + 4]
-    mov rdx, 10
-    mov rcx, 50
-    mov r8d, [WHITE]
-    call DrawRectangle
+      mov rdi, [BLACK]
+      call ClearBackground
 
-  call EndDrawing
+      mov edi, [pos]
+      mov esi, [pos + 4]
+      mov rdx, 10
+      mov rcx, 50
+      mov r8d, [WHITE]
+      call DrawRectangle
+
+    call EndDrawing
 
   call WindowShouldClose
   test rax, rax
