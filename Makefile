@@ -1,5 +1,5 @@
 main:
-	nasm main.asm -f elf64
-	ld main.o -o pong_asm
+	fasm main.asm
+	gcc -no-pie main.o -o pong_asm -lraylib -lm -lc -nostdlib
 run: main
 	./pong_asm
