@@ -4,6 +4,9 @@ section '.text' executable
   public _start
   extrn InitWindow
   extrn CloseWindow
+  extrn WindowShouldClose
+  extrn BeginDrawing
+  extrn EndDrawing
 
 _start:
   mov rdi, 800
@@ -11,9 +14,17 @@ _start:
   mov rdx, title
   call InitWindow
 
+
+  ze_loop:
+  call BeginDrawing
+  call EndDrawing
+  call WindowShouldClose
+  test rax, rax
+  jz ze_loop
+
   call CloseWindow
 
-  mov rax, 231
+  mov rax, 231 ;exit all spawned threads
   mov rdi, 0
   syscall
 
