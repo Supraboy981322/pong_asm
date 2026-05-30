@@ -18,13 +18,13 @@ _start:
 
 
   ze_loop:
-  
+
   call BeginDrawing
     mov rdi, [BLACK]
     call ClearBackground
 
-    mov rdi, [x]
-    mov rsi, [y]
+    mov edi, [pos]
+    mov esi, [pos + 4]
     mov rdx, 10
     mov rcx, 50
     mov r8d, [WHITE]
@@ -45,8 +45,8 @@ _start:
 section '.data' writeable
   title: db "foo bar baz", 0
   pos:
-    x: dd 10
-    y: dd 10
+    dd 10
+    dd 10
   BLACK:
     db 0x00 ;r
     db 0x00 ;g
