@@ -23,6 +23,12 @@ _start:
   test rax, rax
   jnz end_game
 
+    ; FIXME: this is always false
+    ; mov rdi, 265
+    ; call IsKeyDown
+    ; test rax, rax
+    ; jnz end_game
+
     call BeginDrawing
 
       mov rdi, [BLACK]
