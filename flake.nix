@@ -17,11 +17,21 @@
       in {
         # Nix shell
         devShells.default = pkgs.mkShell {
+          RAYLIB_SO = "${pkgs.raylib}/lib/libraylib.so";
+          DYNAMIC_LINKER = "${pkgs.binutils}/nix-support/dynamic-linker";
+          shellHook = ''
+            export NIX_LDFLAGS="-rpath ${pkgs.raylib}/lib -L${pkgs.raylib}/lib -L${pkgs.libGL}/lib -L${pkgs.xorg.libX11}/lib $NIX_LDFLAGS"
+          '';
+
           # install packages
           packages = (with pkgs; [
             #actual source stuff
-            nasm
+            gcc
+            fasm
             gnumake
+
+            binutils
+            pkg-config
 
             #raylib stuff
             raylib
