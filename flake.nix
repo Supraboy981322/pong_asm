@@ -24,6 +24,7 @@
             gnumake
 
             #raylib stuff
+            raylib
             mesa
             glibc
             libXi
