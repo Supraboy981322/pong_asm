@@ -4,6 +4,6 @@
 
 ## build
 ```sh
-make main
+nix develop --build
 ```
 the resulting binary is `pong_asm`
