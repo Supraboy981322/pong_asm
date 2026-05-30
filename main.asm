@@ -7,7 +7,7 @@ section '.text' executable
   extrn WindowShouldClose
   extrn BeginDrawing
   extrn EndDrawing
-  extrn DrawText
+  extrn DrawRectangle
   extrn ClearBackground
 
 _start:
@@ -18,16 +18,17 @@ _start:
 
 
   ze_loop:
+  
   call BeginDrawing
     mov rdi, [BLACK]
     call ClearBackground
 
-    mov rdi, title
-    mov rsi, 400
-    mov rdx, 300
-    mov rcx, 20
+    mov rdi, [x]
+    mov rsi, [y]
+    mov rdx, 10
+    mov rcx, 50
     mov r8d, [WHITE]
-    call DrawText
+    call DrawRectangle
 
   call EndDrawing
 
@@ -43,6 +44,9 @@ _start:
 
 section '.data' writeable
   title: db "foo bar baz", 0
+  pos:
+    x: dd 10
+    y: dd 10
   BLACK:
     db 0x00 ;r
     db 0x00 ;g
