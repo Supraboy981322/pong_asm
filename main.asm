@@ -1,5 +1,9 @@
 format ELF64
 
+WINDOW_START_HEIGHT equ 800
+WINDOW_START_WIDTH equ 600
+
+
 section '.text' executable
   public _start
   extrn InitWindow
@@ -15,8 +19,8 @@ section '.text' executable
   extrn SetTargetFPS
 
 _start:
-  mov rdi, 800
-  mov rsi, 600
+  mov rdi, WINDOW_START_HEIGHT
+  mov rsi, WINDOW_START_WIDTH
   mov rdx, title
   call InitWindow
 
@@ -137,8 +141,8 @@ end_game:
 
 section '.data' writeable
   title: db "foo bar baz", 0
-  SCREEN_HEIGHT: dd 0
-  SCREEN_WIDTH: dd 0
+  SCREEN_HEIGHT: dd WINDOW_START_HEIGHT
+  SCREEN_WIDTH: dd WINDOW_START_WIDTH
   left_paddle:
     dd 10 ;x
     dd 10 ;y
