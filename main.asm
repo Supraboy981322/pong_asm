@@ -115,5 +115,10 @@ section '.data' writeable
     db 0xFF ;g
     db 0xFF ;b
     db 0xFF ;a
-
+  KEYS:
+    KEY_W:    dd 87
+    KEY_S:    dd 83
+    KEY_UP:   dd 265
+    KEY_DOWN: dd 264
+  
 section '.note.GNU-stack'
