@@ -175,14 +175,14 @@ _start:
       mov esi, [left_paddle + 4]
       mov dl, byte [left_paddle + 9]
       mov rcx, 50
-      mov r8d, [WHITE]
+      mov r8d, [left_paddle + 18]
       call DrawRectangle
 
       mov edi, [right_paddle]
       mov esi, [right_paddle + 4]
       mov dl, byte [left_paddle + 9]
       mov rcx, 50
-      mov r8d, [WHITE]
+      mov r8d, [right_paddle + 18]
       call DrawRectangle
 
       cvttss2si edi, [ball]     ;centerX
@@ -302,25 +302,27 @@ section '.data' writeable
   SCREEN_WIDTH: dd WINDOW_START_WIDTH
   DELTA_TIME: dd 0
   left_paddle:
-    dd 10 ;x
-    dd 10 ;y
-    db 5  ;move speed
-    db 10 ;width
-    dd KEY_W ;move up
-    dd KEY_S ; move down
+    dd 10         ;x
+    dd 10         ;y
+    db 5          ;move speed
+    db 10         ;width
+    dd KEY_W      ;move up
+    dd KEY_S      ;move down
+    dd 0xFFFFFFFF ;color
   right_paddle:
-    dd 10 ;x
-    dd 50 ;y
-    db 5  ;move speed
-    db 10 ;width
-    dd KEY_UP   ;move up
-    dd KEY_DOWN ; move down
+    dd 10         ;x
+    dd 50         ;y
+    db 5          ;move speed
+    db 10         ;width
+    dd KEY_UP     ;move up
+    dd KEY_DOWN   ;move down
+    dd 0xFFFFFFFF ;color
   ball:
-    dd 50.0 ;pos x
-    dd 50.0 ;pos y
-    dd 15.0 ;radius
-    dd 15.0 ;vel x
-    dd 10.0 ;vel y
+    dd 50.0       ;pos x
+    dd 50.0       ;pos y
+    dd 15.0       ;radius
+    dd 15.0       ;vel x
+    dd 10.0       ;vel y
     dd 0xFFFFFFFF ;color (white)
 ;
 
