@@ -73,6 +73,10 @@ _start:
       lea rax, [right_down_ret]
       jmp move_down
       right_down_ret:
+      ;set x pos to right side
+      mov edx, [SCREEN_WIDTH]
+      sub edx, 20
+      mov dword [right_paddle], edx
     ;
 
     call BeginDrawing
