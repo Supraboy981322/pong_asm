@@ -61,26 +61,32 @@ _start:
 
   jmp ze_loop
 
-    left_up:
+    move_up:
+      ;expects:
+      ;  - paddle structure in rsi
+      ;  - address of label to jmp back to in rax
       xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
-      mov dil, [left_paddle + 8]  ;speed
-      mov edx, [left_paddle + 4]  ;y pos
+      mov dil, [rsi + 8]  ;speed
+      mov edx, [rsi + 4]  ;y pos
       test edx, edx
-      jz left_up_ret
+      jz move_up_ret
       sub edx, edi
-      mov [left_paddle + 4], edx
-      jmp left_up_ret
-    left_down:
+      mov [rsi + 4], edx
+      move_up_ret: jmp rax
+    move_down:
+      ;expects:
+      ;  - paddle structure in rsi
+      ;  - address of label to jmp back to in rax
       xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
-      mov dil, [left_paddle + 8]  ;speed
-      mov edx, [left_paddle + 4]  ;y pos
+      mov dil, [rsi + 8]  ;speed
+      mov edx, [rsi + 4]  ;y pos
       add edx, 50
       cmp edx, [SCREEN_HEIGHT]
-      jle left_down_ret
+      jle move_down_ret
       sub edx, 50
       add edx, edi
-      mov [left_paddle + 4], edx
-      jmp left_down_ret
+      mov [rsi + 4], edx
+      move_down_ret: jmp rax
 
 end_game:
   call CloseWindow
