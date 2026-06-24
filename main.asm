@@ -21,7 +21,7 @@ _start:
 
   mov rdi, 60
   call SetTargetFPS
-  
+
   ;game loop
   ze_loop:
   call WindowShouldClose
@@ -31,7 +31,7 @@ _start:
     call GetScreenHeight
     mov [SCREEN_HEIGHT], edx
 
-     ; left paddle
+    ; left paddle
       ;up
       mov rdi, [KEY_W]
       call IsKeyDown
@@ -133,5 +133,5 @@ section '.data' writeable
     KEY_S:    dd 83
     KEY_UP:   dd 265
     KEY_DOWN: dd 264
-  
+
 section '.note.GNU-stack'
