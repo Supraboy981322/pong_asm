@@ -206,7 +206,7 @@ _start:
       cvttss2si edi, [ball]     ;centerX
       cvttss2si esi, [ball + 4] ;centerY
       movss xmm0, [ball + 8]    ;radius
-      mov edx, [RED]            ;color
+      mov edx, [ball + 20]      ;color
       call DrawCircle
 
       call EndDrawing
@@ -275,6 +275,7 @@ section '.data' writeable
     dd 15.0 ;radius
     dd 15.0 ;vel x
     dd 10.0 ;vel y
+    dd 0xFFFFFFFF ;color (white)
 
   BLACK:
     db 0x00 ;r
