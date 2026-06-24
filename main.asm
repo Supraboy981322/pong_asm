@@ -137,7 +137,7 @@ section '.data' writeable
     db 5  ;move speed
   right_paddle:
     dd 10 ;x
-    dd 10 ;y
+    dd 50 ;y
     db 5  ;move speed
   ball:
     dd 10 ;pos x
