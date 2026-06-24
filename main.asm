@@ -136,6 +136,8 @@ _start:
       movss [ball + 4], xmm2
 
       ;bounce
+      mov al, 0 ;bounced?
+
       movss xmm0, [ball]
       movss xmm1, [ball + 8]
       subss xmm0, xmm1
@@ -154,6 +156,7 @@ _start:
 
       jmp no_horizontal_bounce
       bounce_horizontal:
+      mov al, 1
       movss xmm0, [ball + 12]
       xorps xmm0, [sign_mask_float]
       movss [ball + 12], xmm0
@@ -177,10 +180,20 @@ _start:
 
       jmp no_vertical_bounce
       bounce_vertical:
+      mov al, 1
       movss xmm0, [ball + 16]
       xorps xmm0, [sign_mask_float]
       movss [ball + 16], xmm0
       no_vertical_bounce:
+
+      test al, al
+      jz ball_white
+      mov eax, [RED]
+      jmp set_ball_color
+      ball_white:
+      mov eax, [WHITE]
+      set_ball_color:
+      mov [ball + 20], eax
     ;
 
     ; draw the frame
