@@ -32,14 +32,14 @@ _start:
     mov [SCREEN_HEIGHT], edx
 
     ;up arrow
-    mov rdi, 265
+    mov rdi, [KEY_W]
     call IsKeyDown
     test al, al
     jnz left_up
     left_up_ret:
 
     ;down arrow
-    mov rdi, 264
+    mov rdi, [KEY_S]
     call IsKeyDown
     test al, al
     jnz left_down 
