@@ -23,6 +23,7 @@ section '.text' executable
   extrn GetScreenWidth
   extrn SetTargetFPS
   extrn DrawCircle
+  extrn GetFrameTime
 
 _start:
   mov rdi, WINDOW_START_WIDTH
@@ -68,6 +69,8 @@ _start:
       mov [SCREEN_HEIGHT], eax
       call GetScreenWidth
       mov [SCREEN_WIDTH], eax
+      call GetFrameTime
+      movss [DELTA_TIME], xmm0
     ;
 
     ; left paddle
@@ -185,6 +188,8 @@ section '.data' writeable
   title: db "foo bar baz", 0
   SCREEN_HEIGHT: dd WINDOW_START_HEIGHT
   SCREEN_WIDTH: dd WINDOW_START_WIDTH
+  DELTA_TIME: dd 0
+  BALL_SPEED_MULT: dd 15.0
   left_paddle:
     dd 10 ;x
     dd 10 ;y
