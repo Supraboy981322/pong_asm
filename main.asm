@@ -31,19 +31,26 @@ _start:
     call GetScreenHeight
     mov [SCREEN_HEIGHT], edx
 
-    ;up arrow
-    mov rdi, [KEY_W]
-    call IsKeyDown
-    test al, al
-    jnz left_up
-    left_up_ret:
-
-    ;down arrow
-    mov rdi, [KEY_S]
-    call IsKeyDown
-    test al, al
-    jnz left_down 
-    left_down_ret:
+     ; left paddle
+      ;up
+      mov rdi, [KEY_W]
+      call IsKeyDown
+      test al, al
+      jz left_up_ret
+      mov rsi, left_paddle
+      lea rax, [left_up_ret]
+      jmp move_up
+      left_up_ret:
+      ;down
+      mov rdi, [KEY_S]
+      call IsKeyDown
+      test al, al
+      jz left_down_ret
+      mov rsi, left_paddle
+      lea rax, [left_down_ret]
+      jmp move_down
+      left_down_ret:
+    ;
 
     call BeginDrawing
 
