@@ -95,7 +95,7 @@ _start:
       mov esi, [right_paddle + 4]
       mov rdx, 10
       mov rcx, 50
-      mov r8d, [RED]
+      mov r8d, [WHITE]
       call DrawRectangle
 
     call EndDrawing
