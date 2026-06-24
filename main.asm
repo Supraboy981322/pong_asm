@@ -84,6 +84,13 @@ _start:
       mov r8d, [WHITE]
       call DrawRectangle
 
+      mov edi, [right_paddle]
+      mov esi, [right_paddle + 4]
+      mov rdx, 10
+      mov rcx, 50
+      mov r8d, [RED]
+      call DrawRectangle
+
     call EndDrawing
 
   jmp ze_loop
