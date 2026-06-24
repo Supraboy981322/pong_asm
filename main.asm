@@ -22,6 +22,7 @@ section '.text' executable
   extrn GetScreenHeight
   extrn GetScreenWidth
   extrn SetTargetFPS
+  extrn DrawCircle
 
 _start:
   mov rdi, WINDOW_START_WIDTH
@@ -121,6 +122,12 @@ _start:
       mov r8d, [WHITE]
       call DrawRectangle
 
+      cvttss2si edi, [ball]     ;centerX
+      cvttss2si esi, [ball + 4] ;centerY
+      movss xmm0, [ball + 8]    ;radius
+      mov edx, [RED]            ;color
+      call DrawCircle
+
       call EndDrawing
     ;
 
@@ -179,10 +186,11 @@ section '.data' writeable
     dd KEY_UP   ;move up
     dd KEY_DOWN ; move down
   ball:
-    dd 10 ;pos x
-    dd 10 ;pos y
-    dd 10 ;vel x
-    dd 10 ;vel y
+    dd 50.0 ;pos x
+    dd 50.0 ;pos y
+    dd 15.0 ;radius
+    dd 10.0 ;vel x
+    dd 10.0 ;vel y
 
   BLACK:
     db 0x00 ;r
