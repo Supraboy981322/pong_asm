@@ -10,12 +10,17 @@ section '.text' executable
   extrn DrawRectangle
   extrn ClearBackground
   extrn IsKeyDown
+  extrn GetScreenHeight
+  extrn SetTargetFPS
 
 _start:
   mov rdi, 800
   mov rsi, 600
   mov rdx, title
   call InitWindow
+
+  mov rdi, 60
+  call SetTargetFPS
   
   ;game loop
   ze_loop:
