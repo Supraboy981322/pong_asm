@@ -35,15 +35,15 @@ _start:
     mov rdi, 265
     call IsKeyDown
     test al, al
-    jnz up_arrow
-    up_arrow_ret:
+    jnz left_up
+    left_up_ret:
 
     ;down arrow
     mov rdi, 264
     call IsKeyDown
     test al, al
-    jnz down_arrow
-    down_arrow_ret:
+    jnz left_down 
+    left_down_ret:
 
     call BeginDrawing
 
@@ -61,26 +61,26 @@ _start:
 
   jmp ze_loop
 
-    up_arrow:
+    left_up:
       xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
       mov dil, [left_paddle + 8]  ;speed
       mov edx, [left_paddle + 4]  ;y pos
       test edx, edx
-      jz up_arrow_ret
+      jz left_up_ret
       sub edx, edi
       mov [left_paddle + 4], edx
-      jmp up_arrow_ret
-    down_arrow:
+      jmp left_up_ret
+    left_down:
       xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
       mov dil, [left_paddle + 8]  ;speed
       mov edx, [left_paddle + 4]  ;y pos
       add edx, 50
       cmp edx, [SCREEN_HEIGHT]
-      jle down_arrow_ret
+      jle left_down_ret
       sub edx, 50
       add edx, edi
       mov [left_paddle + 4], edx
-      jmp down_arrow_ret
+      jmp left_down_ret
 
 end_game:
   call CloseWindow
