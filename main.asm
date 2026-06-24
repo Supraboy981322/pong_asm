@@ -155,6 +155,11 @@ section '.data' writeable
     db 0xFF ;g
     db 0xFF ;b
     db 0xFF ;a
+  RED:
+    db 0xFF ;r
+    db 0x00 ;g
+    db 0x00 ;b
+    db 0xFF ;a
   KEYS:
     KEY_W:    dd 87
     KEY_S:    dd 83
