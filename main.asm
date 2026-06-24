@@ -33,7 +33,6 @@ format ELF64
       db 0xFF ;a
 ;
 
-
 section '.text' executable
   public _start
   extrn InitWindow
