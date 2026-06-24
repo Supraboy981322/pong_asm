@@ -62,7 +62,8 @@ _start:
   jmp ze_loop
 
     up_arrow:
-      mov edi, 1 ;speed
+      xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
+      mov dil, [left_paddle + 8]  ;speed
       mov edx, [left_paddle + 4]  ;y pos
       test edx, edx
       jz up_arrow_ret
@@ -70,7 +71,8 @@ _start:
       mov [left_paddle + 4], edx
       jmp up_arrow_ret
     down_arrow:
-      mov edi, 1 ;speed
+      xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
+      mov dil, [left_paddle + 8]  ;speed
       mov edx, [left_paddle + 4]  ;y pos
       add edx, 50
       cmp edx, [SCREEN_HEIGHT]
