@@ -1,7 +1,7 @@
 format ELF64
 
-WINDOW_START_HEIGHT equ 800
-WINDOW_START_WIDTH equ 600
+WINDOW_START_HEIGHT equ 600
+WINDOW_START_WIDTH equ 800
 
 
 section '.text' executable
@@ -19,8 +19,8 @@ section '.text' executable
   extrn SetTargetFPS
 
 _start:
-  mov rdi, WINDOW_START_HEIGHT
-  mov rsi, WINDOW_START_WIDTH
+  mov rdi, WINDOW_START_WIDTH
+  mov rsi, WINDOW_START_HEIGHT
   mov rdx, title
   call InitWindow
 
