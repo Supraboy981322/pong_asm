@@ -27,6 +27,13 @@ _start:
   mov rdi, 60
   call SetTargetFPS
 
+  mov eax, [SCREEN_HEIGHT]
+  sub eax, 50  ;sub paddle height
+  xor edx, edx ;zero-out top of rax (eax is bottom)
+  mov ecx, 2   ;div by 2
+  div ecx
+  mov dword [left_paddle + 4], eax
+
   ;game loop
   ze_loop:
   call WindowShouldClose
