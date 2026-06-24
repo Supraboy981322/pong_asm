@@ -136,6 +136,29 @@ _start:
       movss [ball + 4], xmm2
 
       ;bounce
+      movss xmm0, [ball]
+      movss xmm1, [ball + 8]
+      subss xmm0, xmm1
+      movss xmm1, [ZERO_FLOAT]
+      ucomiss xmm0, xmm1
+      jb bounce_horizontal
+      je bounce_horizontal
+
+      movss xmm0, [ball]
+      movss xmm1, [ball + 8]
+      addss xmm0, xmm1
+      cvtsi2ss xmm1, [SCREEN_WIDTH]
+      ucomiss xmm0, xmm1
+      ja bounce_horizontal
+      je bounce_horizontal
+
+      jmp no_horizontal_bounce
+      bounce_horizontal:
+      movss xmm0, [ball + 12]
+      xorps xmm0, [sign_mask_float]
+      movss [ball + 12], xmm0
+      no_horizontal_bounce:
+
       movss xmm0, [ball + 4]
       movss xmm1, [ball + 8]
       subss xmm0, xmm1
@@ -250,7 +273,7 @@ section '.data' writeable
     dd 50.0 ;pos x
     dd 50.0 ;pos y
     dd 15.0 ;radius
-    dd 0.0 ;vel x
+    dd 15.0 ;vel x
     dd 10.0 ;vel y
 
   BLACK:
