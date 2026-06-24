@@ -118,6 +118,24 @@ _start:
       mov dword [right_paddle], edx
     ;
 
+    ; ball movement
+      movss xmm0, [ball + 12]
+      mulss xmm0, [DELTA_TIME]
+      mulss xmm0, [BALL_SPEED_MULT]
+
+      movss xmm2, [ball]
+      addss xmm2, xmm0
+      movss [ball], xmm2
+
+      movss xmm1, [ball + 16]
+      mulss xmm1, [DELTA_TIME]
+      mulss xmm1, [BALL_SPEED_MULT]
+
+      movss xmm2, [ball + 4]
+      addss xmm2, xmm1
+      movss [ball + 4], xmm2
+    ;
+
     ; draw the frame
       call BeginDrawing
 
