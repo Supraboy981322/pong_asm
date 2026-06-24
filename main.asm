@@ -46,13 +46,12 @@ _start:
 
   ; center ball
     cvtsi2ss xmm0, [SCREEN_HEIGHT]
-    subss xmm0, [ball + 8]
     mov eax, 2
     cvtsi2ss xmm1, eax
     divss xmm0, xmm1
     movss [ball + 4], xmm0
+
     cvtsi2ss xmm0, [SCREEN_WIDTH]
-    subss xmm0, [ball + 8]
     cvtsi2ss xmm1, eax
     divss xmm0, xmm1
     movss [ball], xmm0
