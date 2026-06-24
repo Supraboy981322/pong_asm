@@ -23,11 +23,10 @@ _start:
   test rax, rax
   jnz end_game
 
-    ; FIXME: this is always false
-    ; mov rdi, 265
-    ; call IsKeyDown
-    ; test rax, rax
-    ; jnz end_game
+    mov rdi, 265
+    call IsKeyDown
+    test al, al
+    jne end_game
 
     call BeginDrawing
 
