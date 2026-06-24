@@ -28,6 +28,10 @@ _start:
   test rax, rax
   jnz end_game
 
+    call GetScreenHeight
+    mov [SCREEN_HEIGHT], edx
+
+    ;up arrow
     mov rdi, 265
     call IsKeyDown
     test al, al
@@ -57,6 +61,7 @@ end_game:
 
 section '.data' writeable
   title: db "foo bar baz", 0
+  SCREEN_HEIGHT: dw 0
   left_paddle:
     dd 10 ;x
     dd 10 ;y
