@@ -134,6 +134,30 @@ _start:
       movss xmm2, [ball + 4]
       addss xmm2, xmm1
       movss [ball + 4], xmm2
+
+      ;bounce
+      movss xmm0, [ball + 4]
+      movss xmm1, [ball + 8]
+      subss xmm0, xmm1
+      movss xmm1, [ZERO_FLOAT]
+      ucomiss xmm0, xmm1
+      jb bounce_vertical
+      je bounce_vertical
+
+      movss xmm0, [ball + 4]
+      movss xmm1, [ball + 8]
+      addss xmm0, xmm1
+      cvtsi2ss xmm1, [SCREEN_HEIGHT]
+      ucomiss xmm0, xmm1
+      ja bounce_vertical
+      je bounce_vertical
+
+      jmp no_vertical_bounce
+      bounce_vertical:
+      movss xmm0, [ball + 16]
+      xorps xmm0, [sign_mask_float]
+      movss [ball + 16], xmm0
+      no_vertical_bounce:
     ;
 
     ; draw the frame
@@ -207,6 +231,7 @@ section '.data' writeable
   SCREEN_WIDTH: dd WINDOW_START_WIDTH
   DELTA_TIME: dd 0
   BALL_SPEED_MULT: dd 15.0
+  ZERO_FLOAT: dd 0.0
   left_paddle:
     dd 10 ;x
     dd 10 ;y
@@ -225,7 +250,7 @@ section '.data' writeable
     dd 50.0 ;pos x
     dd 50.0 ;pos y
     dd 15.0 ;radius
-    dd 10.0 ;vel x
+    dd 0.0 ;vel x
     dd 10.0 ;vel y
 
   BLACK:
@@ -244,5 +269,7 @@ section '.data' writeable
     db 0x00 ;b
     db 0xFF ;a
 ;
+section '.rodata' align 16
+  sign_mask_float: dd 0x80000000, 0x00000000, 0x00000000, 0x00000000
 
 section '.note.GNU-stack'
