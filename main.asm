@@ -57,7 +57,7 @@ _start:
 
     ; left paddle
       ;up
-      mov rdi, [left_paddle + 9]
+      mov rdi, [left_paddle + 10]
       call IsKeyDown
       test al, al
       jz left_up_ret
@@ -66,7 +66,7 @@ _start:
       jmp move_up
       left_up_ret:
       ;down
-      mov rdi, [left_paddle + 13]
+      mov rdi, [left_paddle + 14]
       call IsKeyDown
       test al, al
       jz left_down_ret
@@ -77,7 +77,7 @@ _start:
     ;
     ; right paddle
       ;up
-      mov rdi, [right_paddle + 9]
+      mov rdi, [right_paddle + 10]
       call IsKeyDown
       test al, al
       jz right_up_ret
@@ -86,7 +86,7 @@ _start:
       jmp move_up
       right_up_ret:
       ;down
-      mov rdi, [right_paddle + 13]
+      mov rdi, [right_paddle + 14]
       call IsKeyDown
       test al, al
       jz right_down_ret
@@ -96,7 +96,8 @@ _start:
       right_down_ret:
       ;set x pos to right side
       mov edx, [SCREEN_WIDTH]
-      sub edx, 20
+      sub edx, 10
+      sub dl, byte [right_paddle + 9]
       mov dword [right_paddle], edx
     ;
 
@@ -108,14 +109,14 @@ _start:
 
       mov edi, [left_paddle]
       mov esi, [left_paddle + 4]
-      mov rdx, 10
+      mov dl, byte [left_paddle + 9]
       mov rcx, 50
       mov r8d, [WHITE]
       call DrawRectangle
 
       mov edi, [right_paddle]
       mov esi, [right_paddle + 4]
-      mov rdx, 10
+      mov dl, byte [left_paddle + 9]
       mov rcx, 50
       mov r8d, [WHITE]
       call DrawRectangle
@@ -167,13 +168,15 @@ section '.data' writeable
     dd 10 ;x
     dd 10 ;y
     db 5  ;move speed
+    db 10 ;width
     dd KEY_W ;move up
     dd KEY_S ; move down
   right_paddle:
     dd 10 ;x
     dd 50 ;y
     db 5  ;move speed
-    dd KEY_UP ;move up
+    db 10 ;width
+    dd KEY_UP   ;move up
     dd KEY_DOWN ; move down
   ball:
     dd 10 ;pos x
