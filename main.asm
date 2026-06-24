@@ -35,7 +35,15 @@ _start:
     mov rdi, 265
     call IsKeyDown
     test al, al
-    jne end_game
+    jnz up_arrow
+    up_arrow_ret:
+
+    ;down arrow
+    mov rdi, 264
+    call IsKeyDown
+    test al, al
+    jnz down_arrow
+    down_arrow_ret:
 
     call BeginDrawing
 
