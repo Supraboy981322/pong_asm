@@ -261,6 +261,7 @@ chk_ball_bounce:
   jmp rdx
 ;
 
+; paddle movement helpers
 move_up:
   ;expects:
   ;  - paddle structure in rsi
@@ -287,6 +288,7 @@ move_down:
   add edx, edi
   mov [rsi + 4], edx
   move_down_ret: jmp rax
+;
 
 end_game:
   call CloseWindow
