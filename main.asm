@@ -88,32 +88,32 @@ _start:
 
   jmp ze_loop
 
-    move_up:
-      ;expects:
-      ;  - paddle structure in rsi
-      ;  - address of label to jmp back to in rax
-      xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
-      mov dil, [rsi + 8]  ;speed
-      mov edx, [rsi + 4]  ;y pos
-      test edx, edx
-      jz move_up_ret
-      sub edx, edi
-      mov [rsi + 4], edx
-      move_up_ret: jmp rax
-    move_down:
-      ;expects:
-      ;  - paddle structure in rsi
-      ;  - address of label to jmp back to in rax
-      xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
-      mov dil, [rsi + 8]  ;speed
-      mov edx, [rsi + 4]  ;y pos
-      add edx, 50
-      cmp edx, [SCREEN_HEIGHT]
-      jle move_down_ret
-      sub edx, 50
-      add edx, edi
-      mov [rsi + 4], edx
-      move_down_ret: jmp rax
+move_up:
+  ;expects:
+  ;  - paddle structure in rsi
+  ;  - address of label to jmp back to in rax
+  xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
+  mov dil, [rsi + 8]  ;speed
+  mov edx, [rsi + 4]  ;y pos
+  test edx, edx
+  jz move_up_ret
+  sub edx, edi
+  mov [rsi + 4], edx
+  move_up_ret: jmp rax
+move_down:
+  ;expects:
+  ;  - paddle structure in rsi
+  ;  - address of label to jmp back to in rax
+  xor edi, edi ;zero-out rdi (dil is bottom byte of rdi)
+  mov dil, [rsi + 8]  ;speed
+  mov edx, [rsi + 4]  ;y pos
+  add edx, 50
+  cmp edx, [SCREEN_HEIGHT]
+  jle move_down_ret
+  sub edx, 50
+  add edx, edi
+  mov [rsi + 4], edx
+  move_down_ret: jmp rax
 
 end_game:
   call CloseWindow
