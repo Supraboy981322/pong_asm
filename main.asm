@@ -1,8 +1,9 @@
 format ELF64
 
-WINDOW_START_HEIGHT equ 600
-WINDOW_START_WIDTH equ 800
-
+; constants
+  WINDOW_START_HEIGHT equ 600
+  WINDOW_START_WIDTH equ 800
+;
 
 section '.text' executable
   public _start
@@ -43,10 +44,12 @@ _start:
   test rax, rax
   jnz end_game
 
-    call GetScreenHeight
-    mov [SCREEN_HEIGHT], eax
-    call GetScreenWidth
-    mov [SCREEN_WIDTH], eax
+    ; setup frame
+      call GetScreenHeight
+      mov [SCREEN_HEIGHT], eax
+      call GetScreenWidth
+      mov [SCREEN_WIDTH], eax
+    ;
 
     ; left paddle
       ;up
@@ -93,7 +96,8 @@ _start:
       mov dword [right_paddle], edx
     ;
 
-    call BeginDrawing
+    ; draw the frame
+      call BeginDrawing
 
       mov rdi, [BLACK]
       call ClearBackground
@@ -112,7 +116,8 @@ _start:
       mov r8d, [WHITE]
       call DrawRectangle
 
-    call EndDrawing
+      call EndDrawing
+    ;
 
   jmp ze_loop
 
@@ -149,6 +154,7 @@ end_game:
   mov rdi, 0
   syscall
 
+; game state
 section '.data' writeable
   title: db "foo bar baz", 0
   SCREEN_HEIGHT: dd WINDOW_START_HEIGHT
@@ -187,5 +193,6 @@ section '.data' writeable
     KEY_S:    dd 83
     KEY_UP:   dd 265
     KEY_DOWN: dd 264
+;
 
 section '.note.GNU-stack'
