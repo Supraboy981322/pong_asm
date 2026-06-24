@@ -51,6 +51,26 @@ _start:
       jmp move_down
       left_down_ret:
     ;
+    ; right paddle
+      ;up
+      mov rdi, [KEY_UP]
+      call IsKeyDown
+      test al, al
+      jz right_up_ret
+      mov rsi, right_paddle
+      lea rax, [right_up_ret]
+      jmp move_up
+      right_up_ret:
+      ;down
+      mov rdi, [KEY_DOWN]
+      call IsKeyDown
+      test al, al
+      jz right_down_ret
+      mov rsi, right_paddle
+      lea rax, [right_down_ret]
+      jmp move_down
+      right_down_ret:
+    ;
 
     call BeginDrawing
 
