@@ -61,6 +61,25 @@ _start:
 
   jmp ze_loop
 
+    up_arrow:
+      mov edi, 1 ;speed
+      mov edx, [left_paddle + 4]  ;y pos
+      test edx, edx
+      jz up_arrow_ret
+      sub edx, edi
+      mov [left_paddle + 4], edx
+      jmp up_arrow_ret
+    down_arrow:
+      mov edi, 1 ;speed
+      mov edx, [left_paddle + 4]  ;y pos
+      add edx, 50
+      cmp edx, [SCREEN_HEIGHT]
+      jle down_arrow_ret
+      sub edx, 50
+      add edx, edi
+      mov [left_paddle + 4], edx
+      jmp down_arrow_ret
+
 end_game:
   call CloseWindow
   mov rax, 231 ;exit all spawned threads
