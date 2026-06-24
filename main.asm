@@ -7,7 +7,32 @@ format ELF64
   KEY_S equ 83
   KEY_UP equ 265
   KEY_DOWN equ 264
+
+  ;misc data (stuff that can't be a literal
+  section '.rodata' align 16
+    sign_mask_float: dd 0x80000000, 0x00000000, 0x00000000, 0x00000000
+
+  section '.data'
+    title: db "foo bar baz", 0
+    BALL_SPEED_MULT: dd 15.0
+    ZERO_FLOAT: dd 0.0
+    BLACK:
+      db 0x00 ;r
+      db 0x00 ;g
+      db 0x00 ;b
+      db 0xFF ;a
+    WHITE:
+      db 0xFF ;r
+      db 0xFF ;g
+      db 0xFF ;b
+      db 0xFF ;a
+    RED:
+      db 0xFF ;r
+      db 0x00 ;g
+      db 0x00 ;b
+      db 0xFF ;a
 ;
+
 
 section '.text' executable
   public _start
@@ -271,12 +296,9 @@ end_game:
 
 ; game state
 section '.data' writeable
-  title: db "foo bar baz", 0
   SCREEN_HEIGHT: dd WINDOW_START_HEIGHT
   SCREEN_WIDTH: dd WINDOW_START_WIDTH
   DELTA_TIME: dd 0
-  BALL_SPEED_MULT: dd 15.0
-  ZERO_FLOAT: dd 0.0
   left_paddle:
     dd 10 ;x
     dd 10 ;y
@@ -298,24 +320,6 @@ section '.data' writeable
     dd 15.0 ;vel x
     dd 10.0 ;vel y
     dd 0xFFFFFFFF ;color (white)
-
-  BLACK:
-    db 0x00 ;r
-    db 0x00 ;g
-    db 0x00 ;b
-    db 0xFF ;a
-  WHITE:
-    db 0xFF ;r
-    db 0xFF ;g
-    db 0xFF ;b
-    db 0xFF ;a
-  RED:
-    db 0xFF ;r
-    db 0x00 ;g
-    db 0x00 ;b
-    db 0xFF ;a
 ;
-section '.rodata' align 16
-  sign_mask_float: dd 0x80000000, 0x00000000, 0x00000000, 0x00000000
 
 section '.note.GNU-stack'
