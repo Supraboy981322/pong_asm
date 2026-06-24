@@ -3,6 +3,10 @@ format ELF64
 ; constants
   WINDOW_START_HEIGHT equ 600
   WINDOW_START_WIDTH equ 800
+  KEY_W equ 87
+  KEY_S equ 83
+  KEY_UP equ 265
+  KEY_DOWN equ 264
 ;
 
 section '.text' executable
@@ -53,7 +57,7 @@ _start:
 
     ; left paddle
       ;up
-      mov rdi, [KEY_W]
+      mov rdi, [left_paddle + 9]
       call IsKeyDown
       test al, al
       jz left_up_ret
@@ -62,7 +66,7 @@ _start:
       jmp move_up
       left_up_ret:
       ;down
-      mov rdi, [KEY_S]
+      mov rdi, [left_paddle + 13]
       call IsKeyDown
       test al, al
       jz left_down_ret
@@ -73,7 +77,7 @@ _start:
     ;
     ; right paddle
       ;up
-      mov rdi, [KEY_UP]
+      mov rdi, [right_paddle + 9]
       call IsKeyDown
       test al, al
       jz right_up_ret
@@ -82,7 +86,7 @@ _start:
       jmp move_up
       right_up_ret:
       ;down
-      mov rdi, [KEY_DOWN]
+      mov rdi, [right_paddle + 13]
       call IsKeyDown
       test al, al
       jz right_down_ret
@@ -163,10 +167,14 @@ section '.data' writeable
     dd 10 ;x
     dd 10 ;y
     db 5  ;move speed
+    dd KEY_W ;move up
+    dd KEY_S ; move down
   right_paddle:
     dd 10 ;x
     dd 50 ;y
     db 5  ;move speed
+    dd KEY_UP ;move up
+    dd KEY_DOWN ; move down
   ball:
     dd 10 ;pos x
     dd 10 ;pos y
@@ -188,11 +196,6 @@ section '.data' writeable
     db 0x00 ;g
     db 0x00 ;b
     db 0xFF ;a
-  KEYS:
-    KEY_W:    dd 87
-    KEY_S:    dd 83
-    KEY_UP:   dd 265
-    KEY_DOWN: dd 264
 ;
 
 section '.note.GNU-stack'
