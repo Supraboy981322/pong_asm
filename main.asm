@@ -11,6 +11,7 @@ section '.text' executable
   extrn ClearBackground
   extrn IsKeyDown
   extrn GetScreenHeight
+  extrn GetScreenWidth
   extrn SetTargetFPS
 
 _start:
@@ -29,7 +30,9 @@ _start:
   jnz end_game
 
     call GetScreenHeight
-    mov [SCREEN_HEIGHT], edx
+    mov [SCREEN_HEIGHT], eax
+    call GetScreenWidth
+    mov [SCREEN_WIDTH], eax
 
     ; left paddle
       ;up
@@ -130,7 +133,8 @@ end_game:
 
 section '.data' writeable
   title: db "foo bar baz", 0
-  SCREEN_HEIGHT: dw 0
+  SCREEN_HEIGHT: dd 0
+  SCREEN_WIDTH: dd 0
   left_paddle:
     dd 10 ;x
     dd 10 ;y
