@@ -123,7 +123,7 @@ move_down:
   mov edx, [rsi + 4]  ;y pos
   add edx, 50
   cmp edx, [SCREEN_HEIGHT]
-  jle move_down_ret
+  jge move_down_ret
   sub edx, 50
   add edx, edi
   mov [rsi + 4], edx
